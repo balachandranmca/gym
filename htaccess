@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule> 
+	RewriteEngine on
+	RewriteCond %{HTTP_HOST} ^tennikoit.sgssphysio.com$ [NC,OR]
+	RewriteCond %{HTTP_HOST} ^www.tennikoit.sgssphysio.com$
+	RewriteCond %{REQUEST_URI} !public/
+	RewriteRule (.*) /public/$1 [L]
+</IfModule>
