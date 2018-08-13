@@ -13,17 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::group(['middleware' => 'cors'], function() {
+    
+    Route::post('login', 'API\UserController@login');
 
-Route::post('login', 'API\UserController@login');
-
-Route::middleware('auth:api')->group( function () {
-    Route::post('register', 'API\UserController@register');
-    Route::put('details', 'API\UserController@details');
-    Route::get('getSubscriptionExpire', 'API\DashboardController@getSubscriptionWillExpire');
-    Route::get('getSubscriptionExpired', 'API\DashboardController@getSubscriptionExpired');
-    Route::get('getBirthDayRemainder', 'API\DashboardController@getBirthDayRemainder');
-	Route::resource('subscriptions', 'API\SubscriptionController');
-	Route::resource('customers', 'API\CustomerController');
-	Route::resource('customersubscriptions', 'API\CustomerSubscriptionController');
-	Route::resource('payments', 'API\PaymentController');
+    Route::middleware('auth:api')->group( function () {
+        Route::post('register', 'API\UserController@register');
+        Route::put('details', 'API\UserController@details');
+        Route::get('getSubscriptionExpire', 'API\DashboardController@getSubscriptionWillExpire');
+        Route::get('getSubscriptionExpired', 'API\DashboardController@getSubscriptionExpired');
+        Route::get('getBirthDayRemainder', 'API\DashboardController@getBirthDayRemainder');
+        Route::resource('subscriptions', 'API\SubscriptionController');
+        Route::resource('customers', 'API\CustomerController');
+        Route::resource('customersubscriptions', 'API\CustomerSubscriptionController');
+        Route::resource('payments', 'API\PaymentController');
+    });
 });
